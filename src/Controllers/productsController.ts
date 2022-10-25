@@ -1,4 +1,3 @@
-import bcrypt from 'bcrypt';
 import { NextFunction, Request, Response } from 'express';
 import { ProductModel } from '../Models/productsModel';
 
@@ -34,7 +33,7 @@ export async function showProduct(
   next: NextFunction
 ) {
   try {
-    res.json(await product.show(req.body.productId));
+    res.json(await product.show(Number(req.params.productId)));
   } catch (error) {
     next(error);
   }
@@ -46,7 +45,7 @@ export async function showProductByCategory(
   next: NextFunction
 ) {
   try {
-    res.json(await product.showByCategory(req.body.category));
+    res.json(await product.showByCategory(req.params.category));
   } catch (error) {
     next(error);
   }

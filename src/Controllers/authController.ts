@@ -12,21 +12,21 @@ const { ACCESS_SECRET_KEY } = process.env;
 export async function login(req: Request, res: Response, next: NextFunction) {
   try {
     const targetUser = await user.show(req.body.userId);
-    if (targetUser.id === null) {
-      next(new Error('user not found'));
-    }
-    if (await bcrypt.compare(req.body.password, targetUser.password)) {
-      const token = jwt.sign(
-        {
-          fisrtName: targetUser.fisrtName,
-          lastName: targetUser.lastName
-        },
-        ACCESS_SECRET_KEY as jwt.Secret
-      );
 
-      res.status(200).json({ targetUser, token });
+    if (targetUser) {
+      if (await bcrypt.compare(req.body.password, targetUser.password)) {
+        const token = jwt.sign(
+          {
+            fisrtName: targetUser.fisrtName,
+            lastName: targetUser.lastName
+          },
+          ACCESS_SECRET_KEY as jwt.Secret
+        );
+
+        res.status(200).json({ targetUser, token });
+      }
     } else {
-      next(new Error('Password incorrect'));
+      next(new Error('user not found'));
     }
   } catch (error) {
     next(error);

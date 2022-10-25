@@ -44,3 +44,4 @@ app.use((req: Request, res: Response) => {
 });
 //error MW
 app.use(errorMiddleWare);
+export default app;

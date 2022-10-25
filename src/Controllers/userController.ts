@@ -35,7 +35,7 @@ export async function showUser(
   next: NextFunction
 ) {
   try {
-    res.json(await user.show(req.body.userId));
+    res.json(await user.show(Number(req.params.userId)));
   } catch (error) {
     next(error);
   }

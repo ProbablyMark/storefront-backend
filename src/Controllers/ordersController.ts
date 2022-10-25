@@ -23,7 +23,7 @@ export async function showCurrentOrder(
   next: NextFunction
 ) {
   try {
-    res.json(await order.currentOrder(req.body.id));
+    res.json(await order.currentOrder(Number(req.params.id)));
   } catch (error) {
     next(error);
   }
@@ -35,7 +35,7 @@ export async function showCompletedOrders(
   next: NextFunction
 ) {
   try {
-    res.json(await order.completedOrders(req.body.userId));
+    res.json(await order.completedOrders(Number(req.params.userId)));
   } catch (error) {
     next(error);
   }
