@@ -17,8 +17,8 @@ export class ProductModel {
   async show(id: number): Promise<Product> {
     try {
       const connection = await client.connect();
-      const sql = `SELECT * FROM products WHERE id=${id}`;
-      const result = await connection.query(sql);
+      const sql = `SELECT * FROM products WHERE id=($1)`;
+      const result = await connection.query(sql, [id]);
       connection.release();
       return result.rows[0];
     } catch (error) {
@@ -32,7 +32,7 @@ export class ProductModel {
       const sql = `INSERT INTO products ( 
         name,
         price,
-        category,) values($1,$2,$3) returning *`;
+        category,times_ordered) VALUES ($1,$2,$3,0) returning *`;
       const result = await connection.query(sql, [
         product.name,
         product.price,
@@ -48,8 +48,8 @@ export class ProductModel {
   async showByCategory(category: string): Promise<Product[]> {
     try {
       const connection = await client.connect();
-      const sql = `SELECT * FROM products WHERE category=${category}`;
-      const result = await connection.query(sql);
+      const sql = `SELECT * FROM products WHERE category=($1)`;
+      const result = await connection.query(sql, [category]);
       connection.release();
       return result.rows;
     } catch (error) {

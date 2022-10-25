@@ -6,7 +6,7 @@ export class UserModel {
   async index(): Promise<User[]> {
     try {
       const connection = await client.connect();
-      const sql = `SELECT * FROM users`;
+      const sql = `SELECT user_id, first_name, last_name FROM users`;
       const result = await connection.query(sql);
       connection.release();
       return result.rows;
@@ -18,8 +18,8 @@ export class UserModel {
   async show(id: number): Promise<User> {
     try {
       const connection = await client.connect();
-      const sql = `SELECT * FROM users WHERE id=${id}`;
-      const result = await connection.query(sql);
+      const sql = `SELECT * FROM users WHERE user_id=($1)`;
+      const result = await connection.query(sql, [id]);
       connection.release();
       return result.rows[0];
     } catch (error) {
@@ -30,10 +30,10 @@ export class UserModel {
   async create(user: User): Promise<User> {
     try {
       const connection = await client.connect();
-      const sql = `INSERT INTO products ( 
-        fisrtName,
-        lastName,
-        password ) values($1,$2,$3) returning *`;
+      const sql = `INSERT INTO users ( 
+        first_name,
+        last_name,
+        password ) VALUES ($1,$2,$3) returning *`;
       const result = await connection.query(sql, [
         user.fisrtName,
         user.lastName,

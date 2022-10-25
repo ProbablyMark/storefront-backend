@@ -13,9 +13,12 @@ export const verifyAuthToken = (
     const authorizationHeader = req.headers.authorization;
     const token = authorizationHeader?.split(' ')[1];
     if (!token) {
-      throw new Error();
+      throw new Error('unauthrized');
     }
     const decoded = jwt.verify(token, ACCESS_SECRET_KEY as Secret);
+    if (!decoded) {
+      throw new Error('unauthrized');
+    }
     //save order id in token
 
     next();

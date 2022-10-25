@@ -1,4 +1,3 @@
-import bcrypt from 'bcrypt';
 import { NextFunction, Request, Response } from 'express';
 import { OrderModel } from '../Models/ordersModel';
 
@@ -11,9 +10,7 @@ export async function createOrder(
 ) {
   try {
     await order.create({
-      userId: req.body.userId,
-      products: req.body.products,
-      status: req.body.status
+      userId: req.body.userId
     });
     res.json({ message: 'order created' });
   } catch (error) {
