@@ -23,22 +23,24 @@
 
 - note that you would like to create a user then login to use the token generated for further use of the endpoints
 
--to create the database : `
+-to create the database : 
+```
 CREATE USER <enter user name>;
 CREATE DATABASE  db;
 
 
-`
+```
 
 
 # env variabls needed for the udacity submission
-`POSTGRES_HOST=localhost
+```
+POSTGRES_HOST=localhost
 POSTGRES_DB=db
 POSTGRES_USER= #### /// created user
 POSTGRES_PASSWORD= ###### /// created password 
  
 ACCESS_SECRET_KEY=######  /// any   key you want
-`
+```
 
 
 # content
