@@ -9,9 +9,7 @@ export async function createOrder(
   next: NextFunction
 ) {
   try {
-    await order.create({
-      userId: req.body.userId
-    });
+    await order.create(1);
     res.json({ message: 'order created' });
   } catch (error) {
     next(error);
@@ -35,7 +33,7 @@ export async function showCompletedOrders(
   next: NextFunction
 ) {
   try {
-    res.json(await order.completedOrders(Number(req.params.userId)));
+    res.json(await order.completedOrders(Number(req.params.user_id)));
   } catch (error) {
     next(error);
   }

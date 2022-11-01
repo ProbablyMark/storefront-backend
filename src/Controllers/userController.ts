@@ -12,8 +12,8 @@ export async function createUser(
 ) {
   try {
     await user.create({
-      fisrtName: req.body.firstName,
-      lastName: req.body.lastName,
+      first_name: req.body.firstName,
+      last_name: req.body.lastName,
       password: await bcrypt.hash(req.body.password, await bcrypt.genSalt())
     });
     res.json({ message: 'user created' });

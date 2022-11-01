@@ -21,7 +21,7 @@
 - Run unit tests: `npm run test`
 - Start server: `npm start`
 
-- note that you would like to create a user then login to use the token generated for further use of the endpoints
+- note that you would need to create a user then login to use the token generated for further use of the endpoints
 
 -to create the database :
 
@@ -41,7 +41,8 @@ POSTGRES_DB=db
 POSTGRES_USER= #### /// created user
 POSTGRES_PASSWORD= ###### /// created password
 ENV=dev
-ACCESS_SECRET_KEY=######  /// any   key you want
+ACCESS_SECRET_KEY=dbea35e1a694ad640df527ff06026f222440bd8a9be03828f8c183ff8ca8bd42c374b35aa911f12ae19923e27ddb33bc2373db39c33bd3b560087540620c9620
+
 ```
 
 # content

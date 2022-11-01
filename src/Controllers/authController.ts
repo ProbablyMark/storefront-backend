@@ -17,8 +17,8 @@ export async function login(req: Request, res: Response, next: NextFunction) {
       if (await bcrypt.compare(req.body.password, targetUser.password)) {
         const token = jwt.sign(
           {
-            fisrtName: targetUser.fisrtName,
-            lastName: targetUser.lastName
+            fisrtName: targetUser.first_name,
+            lastName: targetUser.last_name
           },
           ACCESS_SECRET_KEY as jwt.Secret
         );
