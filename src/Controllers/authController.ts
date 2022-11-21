@@ -11,10 +11,12 @@ const { ACCESS_SECRET_KEY } = process.env;
 
 export async function login(req: Request, res: Response, next: NextFunction) {
   try {
-    const targetUser = await user.show(req.body.userId);
+    const targetUser = await user.show(req.body.user_id);
 
     if (targetUser) {
+      console.log('before compare');
       if (await bcrypt.compare(req.body.password, targetUser.password)) {
+        console.log('after compare');
         const token = jwt.sign(
           {
             fisrtName: targetUser.first_name,
@@ -23,12 +25,13 @@ export async function login(req: Request, res: Response, next: NextFunction) {
           ACCESS_SECRET_KEY as jwt.Secret
         );
 
-        res.status(200).json({ targetUser, token });
+        res.status(200).json({ token });
       }
     } else {
       next(new Error('user not found'));
     }
   } catch (error) {
+    console.log('after after compare');
     next(error);
   }
 }

@@ -3,7 +3,7 @@ import app from '../../server';
 
 const request = supertest(app);
 
-describe('test the end point server', () => {
+describe('test the auth end point server', () => {
   ////
 
   it('get not found route , should return 404 for bad url ', async () => {

@@ -1,16 +1,18 @@
 import { OrderModel } from '../../Models/ordersModel';
 import { UserModel } from '../../Models/usersModel';
+import bcrypt from 'bcrypt';
 
 const order = new OrderModel();
 const user = new UserModel();
 describe('test the order Model', () => {
   ////
   beforeAll(async () => {
-    await user.create({
+    const testuser = await user.create({
       first_name: 'first',
       last_name: 'last',
-      password: 'password test'
+      password: await bcrypt.hash('password test', await bcrypt.genSalt())
     });
+    console.log(testuser);
   });
 
   it('should have an completedOrders method', () => {
